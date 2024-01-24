@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Verificação de Malware</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #status {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #scanButton {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dashboard de Verificação de Malware</h1>
+
+    <div id="status">Clique no botão para iniciar a verificação de malware.</div>
+
+    <button id="scanButton" onclick="verificarMalware()">Iniciar Verificação</button>
+
+    <script>
+        async function verificarMalware() {
+            let statusElement = document.getElementById('status');
+            statusElement.textContent = 'Verificação em andamento...';
+
+            try {
+                // Simulação de uma requisição assíncrona para a API de VirusTotal (não real)
+                let resposta = await fetch('https://www.virustotal.com/api/v3/example', {
+                    method: 'GET',
+                    headers: {
+                        'x-apikey': 'SuaChaveAPIAqui'
+                    }
+                });
+
+                // Resultado fictício
+                let resultado = (await resposta.json()).data.attributes.last_analysis_stats;
+
+                statusElement.textContent = `Resultado da verificação:\n${JSON.stringify(resultado)}`;
+            } catch (erro) {
+                statusElement.textContent = 'Erro na verificação.';
+                console.error('Erro:', erro);
+            }
+        }
+    </script>
+
+</body>
+</html>
